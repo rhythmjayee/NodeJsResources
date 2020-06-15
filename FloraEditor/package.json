@@ -1,0 +1,21 @@
+{
+  "name": "c486c028c201f7026fd8e0a212fb3bb1-310011628ddf3fac4fb4d059256abbbd3bcd6524",
+  "version": "1.0.0",
+  "description": "",
+  "main": "file_upload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "busboy": "^0.3.1",
+    "express": "^4.17.1",
+    "froala-editor": "^3.1.1-2",
+    "jquery": "^3.5.1",
+    "path": "^0.12.7",
+    "sha1": "^1.1.1"
+  }
+}
