@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdn.tiny.cloud/1/6ftcxcpgsjvc8chs72s7wj62v8nkv92c5lz196y5i03ymkts/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://tinymce.cachefly.net/4.2/tinymce.min.js"></script> -->
+
+  </head>
+
+  <body>
+  <h1>TinyMCE Quick Start Guide</h1>
+    <form method="post">
+        <textarea>
+            Welcome to TinyMCE!
+          </textarea>
+          <script>
+            tinymce.init({
+  selector: 'textarea',  // change this value according to your html
+  images_upload_url: 'postAcceptor.php',
+  paste_data_images: true,
+  plugins: [
+      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+      "searchreplace wordcount visualblocks visualchars code fullscreen",
+      "insertdatetime media nonbreaking save table contextmenu directionality",
+      "emoticons template paste textcolor colorpicker textpattern"
+    ],
+
+  images_upload_base_path: '/some/basepath',
+  images_upload_credentials: true,
+  images_upload_handler: function (blobInfo, success, failure) {
+	var xhr, formData;
+	xhr = new XMLHttpRequest();
+	xhr.withCredentials = false;
+	xhr.open('POST', 'postAcceptor.php');
+	xhr.onload = function() {
+	  var json;
+
+	  if (xhr.status != 200) {
+		failure('HTTP Error: ' + xhr.status);
+		return;
+	  }
+	  json = JSON.parse(xhr.responseText);
+
+	  if (!json || typeof json.location != 'string') {
+		failure('Invalid JSON: ' + xhr.responseText);
+		return;
+	  }
+	  success(json.location);
+	};
+	formData = new FormData();
+	formData.append('file', blobInfo.blob(), blobInfo.filename());
+	xhr.send(formData);
+  }
+});
+          </script>      
+    </form>
+   
+  </body>
+</html>
